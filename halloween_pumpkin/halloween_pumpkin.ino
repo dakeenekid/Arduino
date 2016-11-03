@@ -1,6 +1,6 @@
 #include "LedControl.h"
  
-LedControl lc=LedControl(12,11,10,2);  // Pins: DIN,CLK,CS,and # of matricies. Yellow, Brown and Orange on board then Yellow, orange brown on the matrix. 
+LedControl lc=LedControl(12,11,10,4);  // Pins: DIN,CLK,CS,and # of matricies. Yellow, Brown and Orange on board then Yellow, orange brown on the matrix. 
  
 unsigned long delayTime=200;  // Delay between Frames
  
@@ -36,16 +36,50 @@ byte eyeballg[] =
   0xFF,0x81,0x81,0xB1,0xB1,0x81,0x81,0xFE,
 };
 
+byte nose[] = 
+{
+  0x00,0x00,0x00,0x10,0x28,0x44,0x82,0x81,
+};
+
+byte b[] =
+{
+  0x00,0xC0,0xA0,0xA0,0xCE,0xAA,0xEE,0x00,
+};
+
+byte o[] =
+{
+  0x00,0x80,0x40,0x40,0x9D,0x55,0xDD,0x00,
+};
+
+byte ex[] =
+{
+  0x00,0x00,0x80,0x80,0x3B,0xAA,0xBB,0x00,
+};
+
+byte ex1[] = 
+{
+  0x00,0x00,0x00,0x00,0x77,0x55,0x77,0x00,
+};
+byte f[] = 
+{
+  0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,
+};
 
  
 void setup()
 {
   lc.shutdown(0,false);  // Wake up displays
   lc.shutdown(1,false);
+  lc.shutdown(2,false);
+  lc.shutdown(3,false);
   lc.setIntensity(0,5);  // Set intensity levels
   lc.setIntensity(1,5);
+  lc.setIntensity(2,5);
+  lc.setIntensity(3,5);
   lc.clearDisplay(0);  //Clear Displays
   lc.clearDisplay(1);
+  lc.clearDisplay(2);
+  lc.clearDisplay(3);
 }
  
  
@@ -151,39 +185,87 @@ void seyeball2g()
     lc.setRow(1,i,eyeballg[i]);
   }
 }
+
+void snose()
+{
+  for (int i=0; i < 8; i++)
+  {
+    lc.setRow(2,i,nose[i]);
+  }
+}
+void sb()
+{
+  for (int i = 0; i < 8; i++)  
+  {
+    lc.setRow(3,i,b[i]);
+  }
+}
+void so()
+{
+  for (int i = 0; i < 8; i++)  
+  {
+    lc.setRow(3,i,o[i]);
+  }
+}
+
+void sex()
+{
+  for (int i = 0; i < 8; i++)  
+  {
+    lc.setRow(3,i,ex[i]);
+  }
+}
+void sex1()
+{
+  for (int i = 0; i < 8; i++)  
+  {
+    lc.setRow(3,i,ex1[i]);
+  }
+}
+
+void sf()
+{
+  for (int i = 0; i < 8; i++)  
+  {
+    lc.setRow(3,i,f[i]);
+  }
+}
 void loop()
 {
 // Put #1 frame on both Display
+    snose();
+    sf();
     seyeball1a();
+    delay(delayTime);
+    seyeball2a();
     delay(delayTime);
     seyeball1b();
     delay(delayTime);
-    seyeball1c();
-    delay(delayTime);
-    seyeball1d();
-    delay(delayTime);
-    seyeball1e();
-    delay(delayTime);
-    seyeball1f();
-    delay(delayTime);
-    seyeball1g();
-    delay(delayTime);
- 
-// Put #2 frame on both Display
-    seyeball2a();
-    delay(delayTime);
     seyeball2b();
+    delay(delayTime);
+    seyeball1c();
     delay(delayTime);
     seyeball2c();
     delay(delayTime);
+    seyeball1d();
+    delay(delayTime);
     seyeball2d();
+    delay(delayTime);
+    seyeball1e();
     delay(delayTime);
     seyeball2e();
     delay(delayTime);
+    seyeball1f();
+    delay(delayTime);
     seyeball2f();
+    delay(delayTime);
+    seyeball1g();
     delay(delayTime);
     seyeball2g();
     delay(delayTime);
+
+
+   
     
  
 }
